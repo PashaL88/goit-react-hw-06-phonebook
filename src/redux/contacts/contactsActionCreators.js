@@ -1,4 +1,4 @@
-import { ADD_CONTACT, DELETE_CONTACT } from './types';
+import { ADD_CONTACT, DELETE_CONTACT } from './contactsTypes';
 import { nanoid } from 'nanoid';
 
 const addContact = payload => {
