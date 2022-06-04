@@ -5,7 +5,7 @@ import ContactList from './ContactList';
 import Filter from './Filter';
 import { getContacts } from 'redux/contacts/contactsSelector';
 
-import actionCreators from '../redux/contacts/contactsActionCreators';
+import actions from '../redux/contacts/contactsActionCreators';
 
 const App = () => {
   const contacts = useSelector(getContacts, shallowEqual);
@@ -13,29 +13,38 @@ const App = () => {
 
   const [filter, setFilter] = useState('');
 
-   useEffect(() => {
-     localStorage.setItem('contacts', JSON.stringify(contacts));
-   }, [contacts]);
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
 
   const addContact = data => {
-    const action = actionCreators.addContact(data);
+    const { name } = data;
+    const dublicate = contacts.find(contact => contact.name === name);
+    if (dublicate) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
+    const action = actions.addContact(data);
     dispatch(action);
   };
 
   const deleteContact = id => {
-    const action = actionCreators.deleteContact(id);
+    const action = actions.deleteContact(id);
     dispatch(action);
   };
 
- 
-
   const changeFilter = ({ target }) => setFilter(target.value);
 
-  const filterText = filter.toLowerCase();
-  contacts.filter(({ name }) => {
-    const result = name.toLowerCase().includes(filterText);
+  const getFilteredContacts = () => {
+    const filterText = filter.toLowerCase();
+    const result = contacts.filter(item => {
+      const name = item.name.toLowerCase().includes(filterText);
+      return name;
+    });
     return result;
-  });
+  };
+
+  const filteredContacts = getFilteredContacts();
 
   return (
     <div>
@@ -43,7 +52,7 @@ const App = () => {
       <ContactForm onSubmit={addContact} />
       <h2>Contacts</h2>
       <Filter filter={filter} changeFilter={changeFilter} />
-      <ContactList contacts={contacts} deleteContact={deleteContact} />
+      <ContactList contacts={filteredContacts} deleteContact={deleteContact} />
     </div>
   );
 };

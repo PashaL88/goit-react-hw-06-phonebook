@@ -18,3 +18,15 @@ const actionCreators = {
 };
 
 export default actionCreators;
+
+// import { createAction } from '@reduxjs/toolkit';
+
+// export const addContact = createAction('contacts/add');
+// export const deleteContact = createAction('contacts/delete');
+
+// const actions = {
+//   addContact,
+//   deleteContact,
+// };
+
+// export default actions;

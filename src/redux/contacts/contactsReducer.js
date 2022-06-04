@@ -13,3 +13,19 @@ const contactsReducer = (store = [], action) => {
 };
 
 export default contactsReducer;
+
+// import { addContact, deleteContact } from './contactsActions';
+
+// const contactsReducer = (store = [], action) => {
+//   switch (action.type) {
+//     case addContact.type:
+//       const newStore = [...store, action.payload];
+//       return newStore;
+//     case deleteContact.type:
+//       return store.filter(item => item.id !== action.payload);
+//     default:
+//       return store;
+//   }
+// };
+
+// export default contactsReducer;
