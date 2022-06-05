@@ -5,7 +5,7 @@ import ContactList from './ContactList';
 import Filter from './Filter';
 import { getContacts } from 'redux/contacts/contactsSelector';
 
-import actions from '../redux/contacts/contactsActionCreators';
+import actions from '../redux/contacts/contactsActions';
 
 const App = () => {
   const contacts = useSelector(getContacts, shallowEqual);
